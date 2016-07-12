@@ -1,0 +1,4 @@
+flask
+flask_restful
+pafy
+unicode_tr
