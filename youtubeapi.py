@@ -8,25 +8,25 @@ api = Api(app)
 
 
 class Index(Resource):
-    def get(self, url):
-        video_url = url
+    def get(self, v_id):
+        video_url = v_id
         video = pafy.new(video_url)
         best = video.getbest()
         new_thumb = video.thumb.replace("default", "hqdefault")
         print(new_thumb)
         return {
-            'title': video.title,
-            'desc': video.description,
-            'count':video.viewcount,
-            'duration': video.duration,
-            'author': video.author,
-            'url': best.url,
-            'thumb': new_thumb,
-            'file': slugify(url+"_"+video.title),
-            'id': video.videoid
+            'videoTitle': video.title,
+            'videoDescription': video.description,
+            'videoCount':video.viewcount,
+            'videoDuration': video.duration,
+            'channelTitle': video.author,
+            'videoUrl': best.url,
+            'videoThumb': new_thumb,
+            'videoFileName': slugify(v_id+"_"+video.title+".mp4"),
+            'videoId': video.videoid
         }
 
-api.add_resource(Index, '/<string:url>')
+api.add_resource(Index, '/<string:v_id>')
 
 if __name__ == '__main__':
     app.run(debug=True)
